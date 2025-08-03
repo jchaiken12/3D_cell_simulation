@@ -1,0 +1,1131 @@
+#LyX 1.4.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 245
+\begin_document
+\begin_header
+\textclass article
+\language english
+\inputencoding auto
+\fontscheme pslatex
+\graphics default
+\paperfontsize 12
+\spacing single
+\papersize letterpaper
+\use_geometry true
+\use_amsmath 2
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\leftmargin 1in
+\topmargin 0.85in
+\rightmargin 1in
+\bottommargin 0.85in
+\headheight 0in
+\headsep 0in
+\footskip 0in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle empty
+\tracking_changes false
+\output_changes true
+\end_header
+
+\begin_body
+
+\begin_layout Subsection*
+Reactions with More than Two Components
+\end_layout
+
+\begin_layout Subsubsection*
+Three-way reactions in MCell
+\end_layout
+
+\begin_layout Standard
+The rate of reaction of a molecule that can engage in a three-way reaction
+ with reactants 
+\begin_inset Formula $I$
+\end_inset
+
+ and 
+\begin_inset Formula $J$
+\end_inset
+
+ at concentrations 
+\begin_inset Formula $\rho_{I}$
+\end_inset
+
+ and 
+\begin_inset Formula $\rho_{J}$
+\end_inset
+
+ is 
+\begin_inset Formula $\kappa\rho_{I}\rho_{J}$
+\end_inset
+
+.
+ Suppose that a single molecule moves a distance 
+\begin_inset Formula $R$
+\end_inset
+
+ while sweeping out an interaction area 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ Then the expected number of hits, assuming that the concentration of 
+\begin_inset Formula $I$
+\end_inset
+
+ and 
+\begin_inset Formula $J$
+\end_inset
+
+ is low, is 
+\begin_inset Formula \[
+n_{\mathrm{{hits}}}=R\, A\,\rho_{I}\cdot R\, A\,\rho_{J}\]
+
+\end_inset
+
+ Thus, the expected number of hits for a molecule with a diffusion length
+ constant of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is 
+\begin_inset Formula \[
+n_{\mathrm{{hits}}}=\int_{0}^{\infty}\rho_{I}\rho_{J}A^{2}R^{2}\frac{4\pi R^{2}}{\pi^{3/2}\lambda^{3}}e^{-R^{2}/\lambda^{2}}dR=\frac{3}{2}\rho_{I}\rho_{J}A^{2}\lambda^{2}\]
+
+\end_inset
+
+ If we let 
+\begin_inset Formula $p$
+\end_inset
+
+ be the probability of reaction, then
+\begin_inset Formula \[
+\kappa\rho_{I}\rho_{J}\Delta t=p\cdot n=p\cdot\frac{3}{2}\rho_{I}\rho_{J}A^{2}\lambda^{2}\]
+
+\end_inset
+
+ Solving for 
+\begin_inset Formula $p$
+\end_inset
+
+ gives 
+\begin_inset Formula \[
+p=\frac{\kappa}{6D\, A^{2}}\]
+
+\end_inset
+
+ assuming that 
+\begin_inset Formula $\Delta t$
+\end_inset
+
+ is the time step for the moving molecule.
+ If we let all three reactants move and react---let us number them 1, 2,
+ and 3---then we matching the total rate gives 
+\begin_inset Formula \[
+\kappa\rho_{1}\rho_{2}\rho_{3}\Delta t=\frac{3}{2}\rho_{1}\rho_{2}\rho_{3}A^{2}\left(p_{1}\frac{\Delta t}{\Delta t_{1}}\lambda_{1}^{2}+p_{2}\frac{\Delta t}{\Delta t_{2}}\lambda_{2}^{2}+p_{3}\frac{\Delta t}{\Delta t_{3}}\lambda_{3}^{2}\right)\]
+
+\end_inset
+
+ where in general the individual molecules may move with custom timesteps
+ 
+\begin_inset Formula $\Delta t_{i}$
+\end_inset
+
+.
+ We let 
+\begin_inset Formula $p_{1}=p_{2}=p_{3}=p$
+\end_inset
+
+ to give 
+\begin_inset Formula \[
+p=\frac{\kappa}{6\left(D_{1}+D_{2}+D_{3}\right)A^{2}}\]
+
+\end_inset
+
+ This solution also works for the cases where some of the reactants can't
+ move (as 
+\begin_inset Formula $D_{i}$
+\end_inset
+
+ will be zero and will drop out of the equation).
+\end_layout
+
+\begin_layout Standard
+Now suppose that the reaction takes place near a surface such that for a
+ fraction 
+\begin_inset Formula $a$
+\end_inset
+
+ of the distance, the molecule sweeps out 
+\begin_inset Formula $A^{\star}<A$
+\end_inset
+
+ of area instead of 
+\begin_inset Formula $A$
+\end_inset
+
+.
+ The expected number of hits is then 
+\begin_inset Formula \[
+n_{\mathrm{{hits}}}^{\star}=R\,\rho_{I}\,\left((1-a)A+aA^{\star}\right)\, R\,\rho_{J}\,\left((1-a)A+aA^{\star}\right)\]
+
+\end_inset
+
+ which we can rewrite as 
+\begin_inset Formula \[
+n_{\mathrm{{hits}}}^{\star}=n_{\mathrm{{hits}}}\left((1-a)^{2}+2a(1-a)\frac{A^{\star}}{A}+a^{2}\left(\frac{A^{\star}}{A}\right)^{2}\right)\]
+
+\end_inset
+
+ where the first term occurs when both hits are in the unconstrained space,
+ the second when one target molecule is in the unconstrained space and one
+ is in the constrained space, and the third when both targets are in the
+ constrained space.
+ If we multiply the probability of reaction by the inverse of the fractional
+ areas for each target, i.e., by 
+\begin_inset Formula $A/A^{\star}$
+\end_inset
+
+ if one target is in the constrained space and 
+\begin_inset Formula $\left(A/A^{\star}\right)^{2}$
+\end_inset
+
+ when both are in the constrained space, we then find that the total rate
+ of reaction is 
+\begin_inset Formula \[
+pn_{\mathrm{{hits}}}\left((1-a)^{2}\cdot1\cdot1+2a(1-a)\frac{A^{\star}}{A}\cdot1\cdot\frac{A}{A^{\star}}+a^{2}\left(\frac{A^{\star}}{A}\right)^{2}\cdot\frac{A}{A^{\star}}\cdot\frac{A}{A^{\star}}\right)=pn_{\mathrm{{hits}}}\]
+
+\end_inset
+
+ That is, the reaction rate is unchanged, which is exactly what we want.
+ Since 
+\begin_inset Formula $a$
+\end_inset
+
+ is arbitrary, we can make 
+\begin_inset Formula $a$
+\end_inset
+
+ differentially small and thus the result holds for arbitrary restrictions
+ of the swept area.
+\end_layout
+
+\begin_layout Subsubsection*
+3-way reactions plus a surface in MCell
+\end_layout
+
+\begin_layout Standard
+If we have three reactants but one of them is on a surface, we can calculate
+ the probability of the moving molecule both striking the surface and hitting
+ the other reactants.
+ If the molecule is a distance 
+\begin_inset Formula $h$
+\end_inset
+
+ above the surface, then the probability of hitting the surface is 
+\begin_inset Formula \[
+p_{\mathrm{surfhit}}=\frac{1}{2}\int_{h}^{\infty}dr_{z}\cdot\frac{1}{\pi^{1/2}\lambda}e^{-r_{z}^{2}/\lambda^{2}}\]
+
+\end_inset
+
+ But the molecule also diffuses in the 
+\begin_inset Formula $xy$
+\end_inset
+
+ plane, and this determines the length of the collision cylinder.
+ If the diffusion distance is 
+\begin_inset Formula $r_{xy}$
+\end_inset
+
+ in that plane, then the total diffusion length is 
+\begin_inset Formula $r=\sqrt{r_{xy}^{2}+r_{z}^{2}}$
+\end_inset
+
+ and the swept volume is 
+\begin_inset Formula $A\sqrt{r_{xy}^{2}+r_{z}^{2}}$
+\end_inset
+
+.
+ For a given 
+\begin_inset Formula $r_{z}$
+\end_inset
+
+, then, the probability of hitting another free molecule is
+\begin_inset Formula \[
+p_{\mathrm{freehit}}=\int_{0}^{\infty}dr_{xy}\cdot\frac{2\pi r_{xy}}{\pi\lambda^{2}}e^{-r_{xy}^{2}/\lambda^{2}}\cdot\left(A\sqrt{r_{xy}^{2}+r_{z}^{2}}\right)\cdot\rho_{1}\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\rho_{1}$
+\end_inset
+
+ is the density of the other free molecule.
+ Thus, the probability of hitting the surface from distance 
+\begin_inset Formula $h$
+\end_inset
+
+ and also hitting a diffusing partner is 
+\begin_inset Formula \[
+\begin{array}{rcl}
+p_{\mathrm{hit}}(h) & = & \frac{1}{2}\int_{h}^{\infty}dr_{z}\frac{1}{\pi^{1/2}\lambda}e^{-r_{z}^{2}/\lambda^{2}}\int_{0}^{\infty}dr_{xy}\cdot\frac{2\rho_{1}A}{\lambda^{2}}\, r_{xy}\sqrt{r_{xy}^{2}+r_{z}^{2}}\cdot e^{-r_{xy}^{2}/\lambda^{2}}\\
+ & = & \frac{\rho_{1}A}{\pi^{1/2}\lambda^{3}}\int_{h}^{\infty}dr_{z}\cdot e^{-r_{z}^{2}/\lambda^{2}}\int_{0}^{\infty}dr_{xy}\cdot r_{xy}\sqrt{r_{xy}^{2}+r_{z}^{2}}e^{-r_{xy}^{2}/\lambda^{2}}\end{array}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The inner integral evaluates to 
+\begin_inset Formula $\frac{\lambda^{2}}{2}r_{z}+\frac{\pi^{1/2}\lambda^{3}}{4}e^{r_{z}^{2}/\lambda^{2}}\mathrm{erfc(\frac{r_{z}}{\lambda})}$
+\end_inset
+
+, giving
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+p_{\mathrm{hit}}(h)=\frac{\rho_{1}A}{2\pi^{1/2}\lambda}\int_{h}^{\infty}dr_{z}\cdot\left(r_{z}e^{-r_{z}^{2}/\lambda^{2}}+\frac{\pi^{1/2}\lambda}{2}\mathrm{erfc}\left(\frac{r_{z}}{\lambda}\right)\right)\]
+
+\end_inset
+
+ The outer integral works out to 
+\begin_inset Formula $\lambda^{2}e^{-h^{2}/\lambda^{2}}-\frac{\lambda h\pi^{1/2}}{2}\mathrm{erfc}(\frac{h}{\lambda})$
+\end_inset
+
+: 
+\begin_inset Formula \[
+p_{\mathrm{hit}}(h)=\frac{\rho_{1}A}{2\pi^{1/2}}\left(\lambda e^{-h^{2}/\lambda^{2}}-\frac{h\pi^{1/2}}{2}\mathrm{erfc}\left(\frac{h}{\lambda}\right)\right)\]
+
+\end_inset
+
+ which we can integrate over the entire column above a surface molecule
+ of area 
+\begin_inset Formula $B$
+\end_inset
+
+ to get the expected number of hits:
+\begin_inset Formula \[
+n_{\mathrm{hit}}=\int_{0}^{\infty}dh\cdot B\cdot\rho_{2}\cdot p_{\mathrm{hit}}(h)=\frac{\rho_{1}A\rho_{2}B}{2\pi^{1/2}}\cdot\frac{3\lambda^{2}\pi^{1/2}}{8}=\frac{3}{16}\lambda^{2}\rho_{1}\rho_{2}AB\]
+
+\end_inset
+
+ Since 
+\begin_inset Formula $n_{\mathrm{hit}}\cdot p_{\mathrm{rx}}$
+\end_inset
+
+ should be equal to the bulk reaction rate 
+\begin_inset Formula $\kappa\rho_{1}\rho_{2}\Delta t$
+\end_inset
+
+, we have 
+\begin_inset Formula \[
+p_{\mathrm{rx}}=\frac{4\,\kappa}{3\, D\, A\, B}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+if only species 2 diffuses (note that 
+\begin_inset Formula $\lambda^{2}/\Delta t=4D$
+\end_inset
+
+).
+ If both volume molecules diffuse, the total number of hits in a time 
+\begin_inset Formula $\Delta t$
+\end_inset
+
+ is 
+\begin_inset Formula \[
+\frac{\Delta t}{\Delta t_{1}}n_{\mathrm{hit},1}+\frac{\Delta t}{\Delta t_{2}}n_{\mathrm{hit},2}=\frac{3}{16}\left(4D_{1}+4D_{2}\right)\rho_{1}\rho_{2}AB\Delta t\]
+
+\end_inset
+
+ so that 
+\begin_inset Formula \[
+p_{\mathrm{rx}}=\frac{4\,\kappa}{3\, A\, B\,(D_{1}+D_{2})}\]
+
+\end_inset
+
+ If the surface can be hit from either side, the number of hits doubles,
+ so the reaction rate should be halved: 
+\begin_inset Formula \[
+p_{\mathrm{rx}}^{\prime}=\frac{2\,\kappa}{3\, A\, B\,(D_{1}+D_{2})}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Three-way reactions with two surface components
+\end_layout
+
+\begin_layout Standard
+The standard computation for the number of hits against a single surface
+ is 
+\begin_inset Formula \[
+n_{\mathrm{hit}}=\frac{\rho_{1}A\lambda}{2\sqrt{\pi}}\]
+
+\end_inset
+
+ and the probability that a grid element is filled with an appropriate surface
+ molecule is 
+\begin_inset Formula $\sigma_{i}A$
+\end_inset
+
+ so that if we demand that we strike the first surface molecule directly
+ and the second is adjacent, then the productive hit rate is (keeping in
+ mind that either of the two surface molecules can be the initial target)
+ 
+\begin_inset Formula \[
+n_{\mathrm{productive}}=\frac{3\rho_{1}\sigma_{2}\sigma_{3}A^{3}\lambda}{\sqrt{\pi}}\]
+
+\end_inset
+
+ The desired number of reactions is 
+\begin_inset Formula $\kappa\rho_{1}\sigma_{2}\sigma_{3}A\Delta t$
+\end_inset
+
+ (if appropriate units are used for the rate constant), so that 
+\begin_inset Formula \[
+p_{\mathrm{rx}}=\kappa\frac{\sqrt{\pi}}{3A^{2}v}\]
+
+\end_inset
+
+In contrast, if one of the components is the surface itself (let's assign
+ it to 
+\begin_inset Formula $\mathrm{\sigma_{3}}$
+\end_inset
+
+) and the other is the molecule, the number of productive collisions drops
+ by a factor of six (no neighbors, and only one target), 
+\begin_inset Formula $\sigma_{3}A=1$
+\end_inset
+
+ in the probability calculation and 
+\begin_inset Formula $\sigma_{3}$
+\end_inset
+
+ is typically omitted entirely from the bulk equation, giving 
+\begin_inset Formula \[
+p_{\mathrm{rx}}^{\prime}=\kappa\frac{2\sqrt{\pi}}{Av}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Three-way reactions with all surface components
+\end_layout
+
+\begin_layout Standard
+If all components are in the surface, the total number of reactions per
+ timestep for a single molecule should be 
+\begin_inset Formula $\kappa\sigma_{2}\sigma_{3}\Delta T$
+\end_inset
+
+ and the actual probability of finding the appropriate neighbors is 
+\begin_inset Formula $3\sigma_{2}A\cdot2\sigma_{3}A$
+\end_inset
+
+.
+ Thus the reaction probability should be 
+\begin_inset Formula \[
+p_{\mathrm{rx}}=\frac{\kappa}{6A^{2}}\Delta t\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+N-way reactions in MCell
+\end_layout
+
+\begin_layout Standard
+Generalizing to 
+\begin_inset Formula $N+1$
+\end_inset
+
+ reactants (one moving and 
+\begin_inset Formula $N$
+\end_inset
+
+ targets), where 
+\begin_inset Formula $N$
+\end_inset
+
+ is a positive integer, we find that the collision rate is 
+\begin_inset Formula \[
+n_{\mathrm{{hits}}}=\int_{0}^{\infty}dR\cdot\prod_{i=1}^{N}\rho_{i}\cdot\left(R\, A\right)^{N}\cdot\frac{4\pi R^{2}}{\pi^{3/2}\lambda^{3}}e^{-R^{2}/\lambda^{2}}=\prod_{i=1}^{N}\rho_{i}\cdot\frac{2\lambda^{N}A^{N}}{\sqrt{\pi}}\Gamma\left(\frac{N+3}{2}\right)\]
+
+\end_inset
+
+ and the bulk rate is 
+\begin_inset Formula $\kappa\cdot\prod_{i=1}^{N}\rho_{i}\cdot\Delta t$
+\end_inset
+
+, so equating probabilities gives 
+\begin_inset Formula \[
+p=\frac{\kappa\sqrt{\pi}\Delta t}{2\lambda^{N}A^{N}\Gamma\left(\frac{N+3}{2}\right)}\]
+
+\end_inset
+
+ Note that 
+\begin_inset Formula $\Gamma(N)=(N-1)!$
+\end_inset
+
+ and 
+\begin_inset Formula $\Gamma(N+\frac{1}{2})=\sqrt{\pi}\cdot2^{-2N}\cdot(2N)!/N!=\sqrt{\pi}\cdot\prod_{i=1}^{N}\frac{2i-1}{2}$
+\end_inset
+
+.
+ If we have multiple moving molecules, 
+\begin_inset Formula \[
+\kappa\cdot\prod_{i=1}^{N+1}\rho_{i}\cdot\Delta t=\prod_{i=1}^{N+1}\rho_{i}\cdot\frac{2A^{N}}{\sqrt{\pi}}\Gamma\left(\frac{N+3}{2}\right)\cdot\sum_{i=1}^{N+1}p_{i}\frac{\Delta t}{\Delta t_{i}}\lambda_{i}^{N}\]
+
+\end_inset
+
+ so that, if we set all the 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+to be equal, 
+\begin_inset Formula \[
+p=\frac{\kappa\sqrt{\pi}}{2\Gamma\left(\frac{N+3}{2}\right)A^{N}\sum\frac{\lambda_{i}^{N}}{\Delta t_{i}}}\]
+
+\end_inset
+
+ By induction on the result for pairs of targets in the 3-way case, we also
+ see that if a target 
+\begin_inset Formula $i$
+\end_inset
+
+ is hit in a restricted space, the reaction probability should be multiplied
+ by 
+\begin_inset Formula $A/A_{i}^{\star}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
+Higher order reactions with single surfaces
+\end_layout
+
+\begin_layout Standard
+The primary equation for 
+\begin_inset Formula $p_{\mathrm{hit}}(h)$
+\end_inset
+
+ remains the same for higher-order reactions except that 
+\begin_inset Formula $\rho_{1}Ar$
+\end_inset
+
+ turns into 
+\begin_inset Formula $\prod_{i=1}^{N-1}\rho_{i}Ar$
+\end_inset
+
+ (recall that 
+\begin_inset Formula $r=\sqrt{r_{xy}^{2}+r_{z}^{2}}$
+\end_inset
+
+.
+ Otherwise the integration is the same.
+ The general formulae for such integrals is rather tricky, but the first
+ few values for 
+\begin_inset Formula $n_{\mathrm{hit}}$
+\end_inset
+
+ are listed here: 
+\begin_inset Formula \[
+\begin{array}{rcl}
+n_{\mathrm{hit}}^{(N=2)} & = & \frac{3}{16}\lambda^{2}AB\prod_{i=1}^{N}\rho_{i}\\
+n_{\mathrm{hit}}^{(N=3)} & = & \frac{1}{2\sqrt{\pi}}\lambda^{3}A^{2}B\prod_{i=1}^{N}\rho_{i}\\
+n_{\mathrm{hit}}^{(N=4)} & = & \frac{15}{32}\lambda^{4}A^{3}B\prod_{i=1}^{N}\rho_{i}\\
+n_{\mathrm{hit}}^{(N=5)} & = & \frac{3}{2\sqrt{\pi}}\lambda^{5}A^{4}B\prod_{i=1}^{N}\rho_{i}\\
+n_{\mathrm{hit}}^{(N=6)} & = & \frac{105}{64}\lambda^{5}A^{5}B\prod_{i=1}^{N}\rho_{i}\\
+n_{\mathrm{hit}}^{(N=7)} & = & \frac{6}{\sqrt{\pi}}\lambda^{6}A^{5}B\prod_{i=1}^{N}\rho_{i}\end{array}\]
+
+\end_inset
+
+ The author conjectures that the formula for even 
+\begin_inset Formula $N$
+\end_inset
+
+ is 
+\begin_inset Formula \[
+\frac{(N+1)!}{4\cdot2^{3N/2}(N/2)!}\lambda^{N}A^{N-1}B\prod_{i=1}^{N}\rho_{i}\]
+
+\end_inset
+
+ and for odd 
+\begin_inset Formula $N$
+\end_inset
+
+ is 
+\begin_inset Formula \[
+\frac{((N+1)/2)!}{4\sqrt{\pi}}\lambda^{N}A^{N-1}B\prod_{i=1}^{N}\rho_{i}\]
+
+\end_inset
+
+ These have been checked up to 
+\begin_inset Formula $N=12$
+\end_inset
+
+ in Maple 10, but these formulae have not been proven.
+\end_layout
+
+\begin_layout Subsubsection*
+Higher order reactions with multiple surface components
+\end_layout
+
+\begin_layout Standard
+Each time one adds a molecular surface component, one adds a factor of 
+\begin_inset Formula $\frac{1}{A}$
+\end_inset
+
+ the first time (if one is already hitting a surface and a molecule needs
+ to be there also), 
+\begin_inset Formula $\frac{1}{3A}$
+\end_inset
+
+ the second time, 
+\begin_inset Formula $\frac{1}{2A}$
+\end_inset
+
+ the third time, and 
+\begin_inset Formula $\frac{1}{A}$
+\end_inset
+
+ the fourth time.
+ More than four molecules cannot be found by adjacent search; if this is
+ generalized to a wider search, then if the extra partner can be found in
+ one of 
+\begin_inset Formula $n$
+\end_inset
+
+ places, the reaction probability changes by 
+\begin_inset Formula $\frac{1}{nA}$
+\end_inset
+
+.
+ In addition, if there are 
+\begin_inset Formula $k$
+\end_inset
+
+ possible surface targets total, the reaction probability should be multiplied
+ by an additional 
+\begin_inset Formula $\frac{1}{k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
+Converting 3-way reactions to 2-way reactions
+\end_layout
+
+\begin_layout Standard
+Suppose we have a three-way reaction 
+\begin_inset Formula \[
+A_{1}+A_{2}+A_{3}\overset{k}{\longrightarrow}A_{123}\]
+
+\end_inset
+
+ which we wish to approximate by nine bimolecular reactions: 
+\begin_inset Formula \[
+\begin{array}{rcl}
+A_{1}+A_{2} & \overset{k_{12}}{\longrightarrow} & A_{12}\\
+A_{1}+A_{3} & \overset{k_{13}}{\longrightarrow} & A_{13}\\
+A_{2}+A_{3} & \overset{k_{23}}{\longrightarrow} & A_{23}\\
+A_{12} & \overset{k_{-12}}{\longrightarrow} & A_{1}+A_{2}\\
+A_{13} & \overset{k_{-13}}{\longrightarrow} & A_{1}+A_{3}\\
+A_{23} & \overset{k_{-23}}{\longrightarrow} & A_{2}+A_{3}\\
+A_{3}+A_{12} & \overset{k_{3}}{\longrightarrow} & A_{123}\\
+A_{2}+A_{13} & \overset{k_{2}}{\longrightarrow} & A_{123}\\
+A_{1}+A_{23} & \overset{k_{1}}{\longrightarrow} & A_{123}\end{array}\]
+
+\end_inset
+
+ At quasi-steady state, we want to match rate of entry in to the 
+\begin_inset Formula $A_{123}$
+\end_inset
+
+ state: 
+\begin_inset Formula \begin{equation}
+kA_{1}A_{2}A_{3}=k_{1}A_{1}A_{23}+k_{2}A_{2}A_{13}+k_{3}A_{3}A_{12}\label{eqn_qss_match}\end{equation}
+
+\end_inset
+
+ And we also wish to keep the quasi-steady state concentrations of the intermedi
+ates 
+\begin_inset Formula $A_{12}$
+\end_inset
+
+, 
+\begin_inset Formula $A_{13}$
+\end_inset
+
+, and 
+\begin_inset Formula $A_{23}$
+\end_inset
+
+ low compared to the starting materials.
+ In general, we will have 
+\begin_inset Formula \[
+\frac{d}{dt}A_{hi}=-k_{j}A_{j}A_{hi}-k_{-hi}A_{hi}+k_{hi}A_{h}A_{i}\approx0\]
+
+\end_inset
+
+ so that 
+\begin_inset Formula \[
+A_{hi}\approx\frac{k_{hi}A_{h}A_{i}}{k_{-hi}+k_{j}A_{j}}\]
+
+\end_inset
+
+ If we want this to be roughly independent of the concentration of 
+\begin_inset Formula $A_{j}$
+\end_inset
+
+ then we require 
+\begin_inset Formula $k_{-hi}\gg k_{j}A_{j}$
+\end_inset
+
+ and can rewrite this as 
+\begin_inset Formula \[
+A_{hi}\approx\frac{k_{hi}}{k_{-hi}}A_{h}A_{i}\left(1-\frac{k_{j}A_{j}}{k_{-hi}}\right)\]
+
+\end_inset
+
+If we further require that 
+\begin_inset Formula $A_{hi}$
+\end_inset
+
+ be small compared to 
+\begin_inset Formula $A_{h}$
+\end_inset
+
+ and 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+, we also require 
+\begin_inset Formula $\frac{k_{hi}}{k_{-hi}}\ll\frac{1}{\max(A_{h},A_{i})}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $A_{+}$
+\end_inset
+
+ be the largest value of any of the 
+\begin_inset Formula $A_{i}$
+\end_inset
+
+ during a simulation.
+ Furthermore, let us set all 
+\begin_inset Formula $k_{j}$
+\end_inset
+
+ to be 
+\begin_inset Formula $k^{\star}$
+\end_inset
+
+, all 
+\begin_inset Formula $k_{hi}$
+\end_inset
+
+ to be 
+\begin_inset Formula $k^{\dagger}$
+\end_inset
+
+ and all 
+\begin_inset Formula $k_{-hi}$
+\end_inset
+
+ to be 
+\begin_inset Formula $k^{\ddagger}$
+\end_inset
+
+.
+ Then our constraints require that 
+\begin_inset Formula $k^{\ddagger}\gg k^{\star}A_{+}$
+\end_inset
+
+ and 
+\begin_inset Formula $k^{\dagger}\ll k^{\ddagger}\frac{1}{A_{+}}$
+\end_inset
+
+; taken together, 
+\begin_inset Formula $k^{\dagger}\approx k^{\star}$
+\end_inset
+
+ is a valid solution, so we may as well make the two the same, 
+\begin_inset Formula $k^{\prime}$
+\end_inset
+
+.
+ Thus, we have a forward reaction rate 
+\begin_inset Formula $k^{\prime}$
+\end_inset
+
+ for all binding reactions and a backward reaction rate 
+\begin_inset Formula $k^{\ddagger}$
+\end_inset
+
+ for dissociation of the intermediates.
+\end_layout
+
+\begin_layout Standard
+Thus, equation (
+\begin_inset LatexCommand \ref{eqn_qss_match}
+
+\end_inset
+
+) becomes 
+\begin_inset Formula \[
+kA_{1}A_{2}A_{3}\approx k^{\prime}A_{1}\frac{k^{\prime}}{k^{\ddagger}}A_{2}A_{3}+k^{\prime}A_{2}\frac{k^{\prime}}{k^{\ddagger}}A_{1}A_{3}+k^{\prime}A_{3}\frac{k^{\prime}}{k^{\ddagger}}A_{1}A_{2}=3\frac{{k^{\prime}}^{2}}{k^{\ddagger}}A_{1}A_{2}A_{3}\]
+
+\end_inset
+
+ with a first-order error term 
+\begin_inset Formula \[
+-\frac{{k^{\prime}}^{3}}{{k^{\ddagger}}^{2}}A_{1}A_{2}A_{3}\left(A_{1}+A_{2}+A_{3}\right)\]
+
+\end_inset
+
+ If we let 
+\begin_inset Formula $k^{\ddagger}=\alpha k^{\prime}$
+\end_inset
+
+, where 
+\begin_inset Formula $\alpha\gg A_{+}$
+\end_inset
+
+, we then have 
+\begin_inset Formula \[
+k\approx\frac{3}{\alpha}k^{\prime}-\frac{A_{1}+A_{2}+A_{3}}{\alpha^{2}}k^{\prime}\]
+
+\end_inset
+
+ Thus, 
+\begin_inset Formula \[
+k_{1}=k_{2}=k_{3}=k_{12}=k_{13}=k_{23}=k^{\prime}\approx\frac{1}{3}\alpha k\]
+
+\end_inset
+
+ and 
+\begin_inset Formula \[
+k_{-12}=k_{-13}=k_{-23}=k^{\ddagger}\approx\frac{1}{3}\alpha^{2}k\]
+
+\end_inset
+
+ Note that our fractional error is approximately 
+\begin_inset Formula $1/\alpha$
+\end_inset
+
+, i.e.
+ if we let 
+\begin_inset Formula $\alpha=100\, A_{+}$
+\end_inset
+
+ our fractional error would be under 1%.
+\end_layout
+
+\begin_layout Subsubsection*
+Notes on Units
+\end_layout
+
+\begin_layout Standard
+When rates are measured for bimolecular reactions between a volume molecule
+ and a surface molecule, one can lay down a surface with known (or measurable)
+ area 
+\begin_inset Formula $\mathcal{A}$
+\end_inset
+
+ in a solution of volume 
+\begin_inset Formula $\mathcal{V}$
+\end_inset
+
+.
+ You then add 
+\begin_inset Formula $n_{1}$
+\end_inset
+
+ volume molecules (concentration 
+\begin_inset Formula $\rho_{1}=n_{1}/\mathcal{V}$
+\end_inset
+
+ in units of #/unit volume) and 
+\begin_inset Formula $n_{2}$
+\end_inset
+
+ surface molecules (at density 
+\begin_inset Formula $\sigma_{2}=n_{2}/\mathcal{A}$
+\end_inset
+
+) and measure 
+\begin_inset Formula \[
+\frac{d\rho_{1}}{dt}=-k_{\rho}\rho_{1}\sigma_{2}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $k_{\rho}$
+\end_inset
+
+ is the rate constant with units of 
+\begin_inset Formula $\mathrm{area}\cdot\#^{-1}\cdot\mathrm{s}^{-1}$
+\end_inset
+
+.
+ One can equally well write this as 
+\begin_inset Formula \[
+\frac{d\sigma_{2}}{dt}=-k_{\sigma}\rho_{1}\sigma_{2}\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $k_{\sigma}$
+\end_inset
+
+ has units of 
+\begin_inset Formula $\mathrm{volume}\cdot\#^{-1}\cdot\mathrm{s}^{-1}$
+\end_inset
+
+.
+ Of course, the numbers of molecules reacting are the same, so that 
+\begin_inset Formula \[
+-k_{\sigma}\mathcal{V}^{-1}n_{1}n_{2}=\mathcal{A}\frac{d\sigma_{2}}{dt}=\frac{dn_{2}}{dt}=\frac{dn_{1}}{dt}=\mathcal{V}\frac{d\rho_{1}}{dt}=-k_{\rho}\mathcal{A}^{-1}n_{1}n_{2}\]
+
+\end_inset
+
+ We can now let 
+\begin_inset Formula $k_{n}=k_{\sigma}\mathcal{V}^{-1}=k_{\rho}\mathcal{A}^{-1}$
+\end_inset
+
+ and write 
+\begin_inset Formula \[
+\frac{dn_{\star}}{dt}=-k_{n}n_{1}n_{2}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+But one can also define 
+\begin_inset Formula $\rho_{2}=\sigma_{2}\cdot\frac{\mathcal{A}}{\mathcal{V}}$
+\end_inset
+
+, that is, treat the surface molecule as if it were a volume molecule, and
+ then 
+\begin_inset Formula \[
+\frac{d\rho_{\star}}{dt}=\frac{dn_{\diamond}}{dt}\mathcal{V}^{-1}=-k_{n}\rho_{1}\rho_{2}\mathcal{V}^{-1}=-k_{\star}\rho_{1}\rho_{2}\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $k_{\star}=k_{n}\cdot\mathcal{V}^{-1}$
+\end_inset
+
+; here 
+\begin_inset Formula $\star$
+\end_inset
+
+ stands for one of 
+\begin_inset Formula $1$
+\end_inset
+
+ or 
+\begin_inset Formula $2$
+\end_inset
+
+, while 
+\begin_inset Formula $\diamond$
+\end_inset
+
+ stands for the other.
+\end_layout
+
+\begin_layout Standard
+If one is performing a stochastic calculation, the total number of hits
+ on all surface molecules in a short time 
+\begin_inset Formula $\Delta t$
+\end_inset
+
+ is 
+\begin_inset Formula \[
+n_{2}\frac{\rho_{1}A\lambda}{2\sqrt{\pi}}\Delta t\]
+
+\end_inset
+
+ where 
+\begin_inset Formula $A$
+\end_inset
+
+ is the area of a single surface molecule.
+ From the well-mixed continuum approximation, the probability should be
+ scaled such that 
+\begin_inset Formula \[
+-p_{\mathrm{rx}}\cdot n_{2}\frac{\rho_{1}A\lambda}{2\sqrt{\pi}}=\frac{dn_{\diamond}}{dt}\Delta t=\mathcal{V}\frac{d\rho_{\star}}{dt}\Delta t=-k_{\star}n_{2}\rho_{1}\Delta t\]
+
+\end_inset
+
+ so that 
+\begin_inset Formula $p_{\mathrm{rx}}=k_{\star}\cdot2\sqrt{\pi}/Av$
+\end_inset
+
+ where 
+\begin_inset Formula $v=\lambda/\Delta t$
+\end_inset
+
+.
+ Thus, we can use the volumetric rate constant 
+\begin_inset Formula $k_{\star}$
+\end_inset
+
+ where we need only convert from molarity to #/unit volume---we need not
+ know the original volume of the test sample or the area of membrane in
+ it, as long as the value of 
+\begin_inset Formula $k_{\mathrm{\star}}$
+\end_inset
+
+ is reported.
+ Conveniently, one can measure 
+\begin_inset Formula $k_{\star}$
+\end_inset
+
+ without even knowing the area of the membrane.
+\end_layout
+
+\begin_layout Standard
+However, if we add a second surface component at density 
+\begin_inset Formula $\sigma_{3}$
+\end_inset
+
+, the above is no longer true since the reaction rate is no longer proportional
+ to the numbers of each molecule.
+ In particular, 
+\begin_inset Formula \[
+\frac{d\rho_{1}}{dt}=-k_{\rho}\rho_{1}\sigma_{2}\sigma_{3}\]
+
+\end_inset
+
+ 
+\begin_inset Formula \[
+\frac{d\sigma_{i\in\{2,3\}}}{dt}=-k_{\sigma}\rho_{1}\sigma_{2}\sigma_{3}\]
+
+\end_inset
+
+ defines the reactions, but now 
+\begin_inset Formula \[
+\frac{dn_{1}}{dt}=\mathcal{V}\frac{d\rho_{1}}{dt}=-k_{\rho}n_{1}n_{2}n_{3}\mathcal{A}^{-2}\]
+
+\end_inset
+
+ 
+\begin_inset Formula \[
+\frac{dn_{i}}{dt}=\mathcal{A}\frac{d\sigma_{i}}{dt}=-k_{\sigma}n_{1}n_{2}n_{3}\mathcal{A}^{-1}\mathcal{V}^{-1}\]
+
+\end_inset
+
+ so that 
+\begin_inset Formula $k_{n}=k_{\sigma}\mathcal{A}^{-1}\mathcal{V}^{-1}=k_{\rho}\mathcal{A}^{-2}$
+\end_inset
+
+.
+ If we try the same trick of converting 
+\begin_inset Formula $\sigma_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma_{3}$
+\end_inset
+
+ to volumes, we find that -k
+\begin_inset Formula \[
+-k_{\star}\rho_{1}\rho_{2}\rho_{3}=\frac{d\rho_{\star}}{dt}=\mathcal{V}^{-1}\frac{dn_{\star}}{dt}=-k_{n}n_{1}n_{2}n_{3}\mathcal{V}^{-1}=-k_{n}\rho_{1}\rho_{2}\rho_{3}\mathcal{V}^{2}\]
+
+\end_inset
+
+ so that 
+\begin_inset Formula $k_{n}=k_{\star}\mathcal{V}^{-2}$
+\end_inset
+
+.
+ When we try to match total numbers of molecules reacting, we find that
+ there are 
+\begin_inset Formula \[
+p_{\mathrm{rx}}\frac{3\rho_{1}\sigma_{2}\sigma_{3}A^{3}\lambda}{\sqrt{\pi}}\cdot\frac{\mathcal{A}}{A}\]
+
+\end_inset
+
+ total reactions in time 
+\begin_inset Formula $\Delta t$
+\end_inset
+
+ in a stochastic treatment (the factor of 
+\begin_inset Formula $\mathcal{A}/A$
+\end_inset
+
+ arises from the difference between the per-receptor area and the total
+ surface area), and 
+\begin_inset Formula \[
+\frac{dn_{\star}}{dt}\Delta t=\mathcal{V}\frac{d\rho_{\star}}{dt}\Delta t=-k_{\star}\rho_{1}\rho_{2}\rho_{3}\mathcal{V}\Delta t=-k_{\star}\rho_{1}\sigma_{2}\sigma_{3}\frac{\mathcal{A}^{2}}{\mathcal{V}}\Delta t\]
+
+\end_inset
+
+ from the deterministic continuum equations.
+ Equating the two (with the correct sign) gives 
+\begin_inset Formula \[
+p_{rx}=k_{\star}\frac{\sqrt{\pi}}{3A^{2}v}\cdot\frac{\mathcal{A}}{\mathcal{V}}\]
+
+\end_inset
+
+ This is problematic because the probability of reaction now depends on
+ the surface to volume ratio 
+\begin_inset Formula $\mathcal{A}/\mathcal{V}$
+\end_inset
+
+; what we need is 
+\begin_inset Formula $k_{\star}\frac{\mathcal{A}}{\mathcal{V}}$
+\end_inset
+
+.
+ Fortunately, 
+\begin_inset Formula $k_{\sigma}=k_{n}\mathcal{A}\mathcal{V}=k_{\star}\frac{\mathcal{A}}{\mathcal{V}}$
+\end_inset
+
+.
+ Thus, the only appropriate rate constant for three-molecule reactions is
+ 
+\begin_inset Formula $k_{\sigma}$
+\end_inset
+
+, which has units of 
+\begin_inset Formula $\mathrm{volume}\cdot\mathrm{area}\cdot\#^{-2}\cdot s^{-1}$
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document

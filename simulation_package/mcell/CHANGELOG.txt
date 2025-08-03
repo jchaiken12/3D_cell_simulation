@@ -1,0 +1,109 @@
+CHANGELOG
+===============================================================================
+
+Changes in MCell 4.0.5
+-------------------------------------------------------------------------------
+* API changes:
+  * All usages of Vec3 and Vec2 were replaced in API with List[double] 
+  * Numpy float and int arrays are accepted as arguments 
+  
+* Reaction callback now allows to cancel the current reaction 
+  
+Changes in MCell 4.0.4
+-------------------------------------------------------------------------------  
+* New features:
+  * Added support for paired molecules, paired molecules represent two 
+    membrane-bound proteins bound togehert and when one membrane (wall)
+    is moved through dynamic geometry, the second membrane is moved as well 
+
+Changes in MCell 4.0.3
+-------------------------------------------------------------------------------  
+* New features:
+  * Handling of overlapped walls (overlapped walls must use vertices with identical coordinates)
+
+* Minor changes:
+  * Support for default VizOutput and Count output directories/files
+  
+* Bug Fixes:
+  * Fixed timed count buffer flush  
+
+Changes in MCell 4.0.2
+-------------------------------------------------------------------------------
+* Bug Fixes:
+  * Fixed case when having a transparent surface did not correctly adjust 
+    volume reaction rate
+  * Partial fix for geometry import using SBML in CellBlender
+  * Check for scheduling events such as Counts too far into the future
+  
+* Minor changes:
+  * Project base name 'Scene' is not used when exporting MCell4 Python files
+
+Changes in MCell 4.0.1
+-------------------------------------------------------------------------------
+* Bug Fixes:
+  * Fixed dependency on system Python3.9.so
+
+* Minor changes:
+  * Exporting counts information in export_viz_data_model
+  * Support for region expressions for counts in exported data model
+
+Changes in MCell 4.0.0
+-------------------------------------------------------------------------------
+* Completely new MCell implementation
+
+
+Changes in MCell 3.5.1
+-------------------------------------------------------------------------------
+
+* Major changes:
+  * Integration of mesh processing tool GAMer 2
+  * Integration of mesh import tool Neuropil Tools
+  * Using BNGSim library for compartmental BNGL import
+
+* Bug Fixes:
+  * Fixed multiple surface-surface reaction handling when the reactions had the same reactants
+  * Fixed MCell-R conversion step when the number of molecules to release was 0
+
+* Minor changes:
+  * MCell-R/NFsim now prints out less messages
+  * Integrated tck-tk for Linux and MacOS builds so the base operating system does not need to provide them 
+
+* Known limitations:
+  * MacOS version must be extracted into the /Applications/ directory manually and should be run from 
+    terminal with the current directory being the root directory '/'
+  * Part of Neuropil Tools volFixAll might not work out of the box on all MacOS instalation and tweaking 
+    to install Qt4 correctly is needed, however, this tool is not needed for all the use cases for Neuropil Tools
+  * Windows version does not contain the Neuropil Tools plugin 
+  
+* Known issues:
+  * Some models stored a a .blend file from 3.5.0 and older releases might fail to import, 
+    it is possible to export them as data model and import data model
+  * Adding surface regions before creating an object might cause an error, it is possible 
+    to create an object first 
+  
+Changes in MCell 3.5.0
+-------------------------------------------------------------------------------
+
+* Requirements:
+  * BNGL style reactions (MCell-R) require Perl to be installed, Windows variant is known to work with Perl from strawberryper.com and must be as the first perl.exe in PATH 
+  * To use Matplotlib, Debian 9 and 10 require package 'tk' to be installed; instead of installing it, it is possible to run export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:`pwd`/2.79/python/lib/ in Blender-2.79-CellBlender before running the ./blender executable     
+
+* Known limitations:
+  * Windows build does not contain GAMER plugin for mesh refinement
+  * Older settings might interfere on Windows, to fix this, please erase C:\Users\USER_NAME\AppData\Roaming\Blender Foundation
+  * MacOS version must be extracted into the /Applications/ directory manually and must be run from terminal with working directory being the root directory '/' 
+  
+* Major changes:
+  * NFSim reaction engine gets the same seed as mcell, no longer it generates its seed from current time 
+  * Several improvements in CellBlender plugin with regards to BNGL type reactions
+  * Automated build and test system
+
+* Bug Fixes:
+  * Fixed several issues for BNGL type reactions in compartments support 
+  * Fixed case when memory usage grew indefinitely when logging BNGL type reactions
+  * Fixed variable release scheduling rate when checkpoint with different timestep is loaded
+  
+* Optimizations:
+  * Optimized search in nfSim reaction cache (up to 2x speedup for some MCellR models)
+
+
