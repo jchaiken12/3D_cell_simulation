@@ -1,0 +1,17 @@
+CellBlender release: internal
+Built on 2024-12-19 13:47 ('IST', 'IDT')
+OS: Linux-5.15.0-122-generic-x86_64-with-glibc2.29
+GCC: gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0
+
+mcell: "3920aec22c55013b78f7d6483b81f70a0d564d22" (heads/master)
+libbng: "1d9fe00a2cc9a8d223078aec2700e7b86b10426a" (tags/4.0.5)
+cellblender: "5dba1ff400af8b64909a509667af9e0eeb7ea8db" (heads/master)
+mcell_tests: "34d2d967b75d56edbae999bf0090641850f4f4fe" (tags/4.0.5)
+mcell_tools: "e76f6db3bea7b8853a93f82db17e6f7fde15222b" (tags/4.0.5)
+neuropil_tools: "5f70bce6226dcb0d5f5f285dd6cf558fb16fd67d" (tags/4.0.5)
+mesh_tools: "6245cbc37464921a55223614b33e2c37f4c5987f" (tags/4.0.5)
+VTK: "a934c0df8e7e31166881b1a1b55bd2c99fcd9884" (tags/4.0.5)
+nfsim: "eb557a6c32c94f16d84b7f104dfb748e1f6005ca" (tags/mcell_4.0.5)
+nfsimCInterface: "030ba477f95507dded2705b7d0861abca625d3e1" (tags/mcell_4.0.5)
+bionetgen: "def0c949b36c83b7848bbe33250ce81641d40e11" (tags/mcell_4.0.5)
+gamer: "cf9f93c6454522a7ff04216473686ff51d2e4191" (tags/mcell_4.0.5)
