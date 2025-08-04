@@ -3,7 +3,7 @@ This was the file structure and code used to run the multiple cellular simulatio
 Steps for installation can be found here <br/>
 https://mcell.org/mcell4_documentation/installation.html <br/>
 Blender version 2.93 and Mcell version 4.0.5 were used for all the simulations.
-These older version can be found here <br/>
+These older versions can be found here <br/>
 https://mcell.org/download_previous_versions.html <br/>
 
 
