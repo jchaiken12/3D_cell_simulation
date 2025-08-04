@@ -1,5 +1,6 @@
 # Description
 This was the file structure and code used to run the multiple cellular simulations.
+Steps for installation can be found here (https://mcell.org/mcell4_documentation/installation.html)
 
 ## Mcell
 This folder contains the required code to run the cellular simulation. The build files are included
@@ -9,12 +10,10 @@ in this folder allowing use of the code in other python scripts.
 This folder is where all individual simulations were constucted and run using the command prompt. 
 Python script would start with the line
 
-    import mcell
+    import mcell as m
     
 to execute the necessary functions, parameters, etc. to run the physics based simulation. 
 
-### Comments
-Run the following commands:
-
-    sudo apt-get update
-    sudo apt-get install cmake build-essential bison flex python3-dev swig libboost-all-dev
+## Comments
+All the code was run and tested in a linux environment. No code has been tested in a windows
+operating system. 
