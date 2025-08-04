@@ -1,0 +1,21 @@
+#! /bin/sh
+
+OUTFILE="$3"
+SRCDIR=`dirname $0`
+YLWRAP_REAL="${SRCDIR}/ylwrap"
+if test -f "${OUTFILE}"; then
+  cp -f "${OUTFILE}" "${OUTFILE}.tmp"
+else
+  touch "${OUTFILE}.tmp"
+fi
+
+"${YLWRAP_REAL}" "$@" || exit 1
+if test -f "${OUTFILE}" && cmp -s "${OUTFILE}" "${OUTFILE}.tmp"; then
+  echo "Not prepending source dir ${SRCDIR} (from $0)"
+else
+  mv -f "${OUTFILE}" "${OUTFILE}.tmp"
+  echo "Prepending source dir ${SRCDIR} (from $0)"
+  SRCDIR2=`echo "${SRCDIR}" | sed 's/@/\\@/'`
+  cat "${OUTFILE}.tmp" | sed "s@#line *\([0-9]\+\) *\"\([^ ]*\.[ly]\)\"@#line \1 \"${SRCDIR2}\/\2\"@" > "${OUTFILE}"
+fi
+rm -f "${OUTFILE}.tmp"
