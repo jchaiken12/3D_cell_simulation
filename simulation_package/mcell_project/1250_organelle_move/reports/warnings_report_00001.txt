@@ -1,0 +1,3 @@
+Warning: Some reactions were missed because total reaction probability exceeded 1.
+  a@OUT + t1'  --  22.227% of reactions missed.
+  c@IN + t1'  --  8.125% of reactions missed.
