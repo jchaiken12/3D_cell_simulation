@@ -8,7 +8,9 @@ in this folder allowing use of the code in other python scripts.
 ## Mcell Project
 This folder is where all individual simulations were constucted and run using the command prompt. 
 Python script would start with the line
-  import mcell
+
+    import mcell
+    
 to execute the necessary functions, parameters, etc. to run the physics based simulation. 
 
 ### Comments
