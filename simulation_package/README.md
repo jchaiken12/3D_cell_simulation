@@ -12,3 +12,7 @@ Python script would start with the line
 to execute the necessary functions, parameters, etc. to run the physics based simulation. 
 
 ### Comments
+Run the following commands:
+
+    sudo apt-get update
+    sudo apt-get install cmake build-essential bison flex python3-dev swig libboost-all-dev
