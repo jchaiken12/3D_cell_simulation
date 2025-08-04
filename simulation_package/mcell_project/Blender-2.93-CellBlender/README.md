@@ -2,4 +2,7 @@
 
 The given python script was added as a blender add on to enable easy export of geomtry files to run physics based simulation on. <br/>
 The script was added in the path: <br/>
-path/to/origin/Blender-2.93-CellBlender/2.93/scripts/addons.
+<install_path>/Blender-2.93-CellBlender/2.93/scripts/addons. <br/>
+The command that starts Blender and allows a simulation run to be visualized is as follows:
+    
+    <install_path>/Blender-2.93-CellBlender/my_blender -P <install_path>/Blender-2.93-CellBlender/2.93/scripts/addons/cellblender/developer_utilities/mol_viz_scripts/viz_mcell_run.py -- viz_data/seed_00001/
