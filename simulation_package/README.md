@@ -1,6 +1,11 @@
 # Description
 This was the file structure and code used to run the multiple cellular simulations.
-Steps for installation can be found here (https://mcell.org/mcell4_documentation/installation.html)
+Steps for installation can be found here <br/>
+https://mcell.org/mcell4_documentation/installation.html <br/>
+Blender version 2.93 and Mcell version 4.0.5 were used for all the simulations.
+These older version can be found here <br/>
+https://mcell.org/download_previous_versions.html <br/>
+
 
 ## Mcell
 This folder contains the required code to run the cellular simulation. The build files are included
