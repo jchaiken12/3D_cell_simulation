@@ -2,7 +2,7 @@
 Here is where the simulation script was run. The contained sub directories are examples from the mcell team that work and
 can be used to quickly test if the project is working correctly. 
 
-## General Setup for Linux
+## General Setup for Ubuntu 20.04.6 LTS
 Conda was used to manage the python version for the required minimum version of python. The minimum desired version of python 
 was version 3.11 as stated on the mcell website. Then the environment variable MCELL_PATH was set in the command line by:
 
