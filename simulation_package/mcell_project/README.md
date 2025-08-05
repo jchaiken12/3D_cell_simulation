@@ -6,15 +6,21 @@ can be used to quickly test if the project is working correctly.
 Conda was used to manage the python version for the required minimum version of python. The minimum desired version of python 
 was version 3.11 as stated on the mcell website. Then the environment variable MCELL_PATH was set in the command line by:
 
-    export MCELL_PATH=<install_path>/Blender-2.93-CellBlender/2.93/scripts/addons/cellblender/extensions/mcell
+    export MCELL_PATH=<install_path>/Blender-2.93-CellBlender/2.93/scripts/addons/cellblender/extensions/mcell/
 
-Once the correct python version is set to be run for the command line and the environment variable is set to the correct path
+The same should be done for a later version of Blender and the corresponding cellblender addon. Once the correct python 
+version is set to be run for the command line and the environment variable is set to the correct path
 one can run the main python script. The main python script to run each simulation is called model.py.
 On the command line we would write the following line with reference to the correct path:
 
     python model.py
 
-A data_layout.json file and viz_data, reports, and __pycache__ folders should be created with data constantly being added to the
-viz_data folder until all iterations are finished.
-## General Setup for Microsoft Windows 11
+A data_layout.json file and viz_data, reports, and pycache folders should be created with data constantly being added to the
+viz_data folder until all iterations are finished. The number of iterations should be defined in paramters.py.
 
+## General Setup for Microsoft Windows 11
+Again we need at least python 3.11 to run the code. Then the environment variable MCELL_PATH must be set through Microsofts
+environment variables window. To create a new variable: Click "New" under the desired section (User or System), enter the 
+"Variable name" of MCELL_PATH and "Variable value" as 
+<install_path>/Blender-2.93-CellBlender/2.93/scripts/addons/cellblender/extensions/mcell/
+and click "OK."
