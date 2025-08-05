@@ -19,6 +19,3 @@ Python script would start with the line
     
 to execute the necessary functions, parameters, etc. to run the physics based simulation. 
 
-## Comments
-All the code was run and tested in a linux environment. No code has been tested in a windows
-operating system. 
