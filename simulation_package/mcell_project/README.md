@@ -34,3 +34,5 @@ setup and run
     python model.py
 
 The same output as above should be expected.
+
+## Visualization with Blender using Cellblender
