@@ -1,5 +1,5 @@
 # Project Directory
-Here is where the simulation script was run. The contained sub directories are examples from the mcell team that work and
+Here is where the simulation script was run. The 1250_organelle_move folder comes from the mcell team that works and
 can be used to quickly test if the project is working correctly. 
 
 ## General Setup for Ubuntu 20.04.6 LTS
