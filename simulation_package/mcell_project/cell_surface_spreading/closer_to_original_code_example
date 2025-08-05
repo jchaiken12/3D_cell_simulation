@@ -1,0 +1,177 @@
+
+# this will not work but will be used as a reference to original function structure
+# this should help with debugging
+
+import numpy as np
+import random as rnd
+import math
+
+def signed_vol_w(p1, p2, p3):
+
+    p3_x = p3[0]
+    p3_y = p3[1]
+    p3_z = p3[2]
+
+    p2_x = p2[0]
+    p2_y = p2[1]
+    p2_z = p2[2]
+
+    p1_x = p1[0]
+    p1_y = p1[1]
+    p1_z = p1[2]
+
+    v321 = p3_x*p2_y*p1_z
+    v231 = p2_x*p3_y*p1_z
+    v312 = p3_x*p1_y*p2_z
+    v132 = p1_x*p3_y*p2_z
+    v213 = p2_x*p1_y*p3_z
+    v123 = p1_x*p2_y*p3_z
+
+    return (1.0/6.0)*(-v321 + v231 + v312 - v132 - v213 + v123)
+
+def VolumeOfMesh(model, sphere, wall_list):
+    vol = 0
+    for w in wall_list:
+        p1 = model.get_vertex(sphere, w[0])
+        p2 = model.get_vertex(sphere, w[1])
+        p3 = model.get_vertex(sphere, w[2])
+        vol += signed_vol_w(p1, p2, p3)
+
+    return abs(vol)
+
+def get_area(src, nbrs, model, sphere, new_move=np.array([0,0,0])):
+
+    new_move = np.asarray(new_move)
+    area = 0
+    start_node = rnd.randrange(0,len(nbrs)-1)
+    rcp_length_unit = 0.01
+    # approximation but twice as fast at least
+    #type(verts)
+    for i in range(int(len(nbrs))-1):
+        # v1 = [b-a for a, b in zip(verts[nbrs[4]], verts[src])]
+        # v2 = [b-a for a, b in zip(verts[nbrs[5]], verts[src])]
+        # area += .5 * np.linalg.norm(np.cross(v1,v2))
+        p1 = np.asarray(model.get_vertex(sphere, nbrs[i]))
+        p2 = np.asarray(model.get_vertex(sphere, nbrs[i+1]))
+        sp = np.asarray(model.get_vertex(sphere, src))
+        v1 = p1-sp-new_move
+        v2 = p2-sp-new_move
+        area += .5 * np.linalg.norm(np.cross(v1,v2))
+
+    # num = rnd.randint(0, len(nbrs)-2)
+    # v1 = np.array(verts[nbrs[start_node]]) - np.array(verts[src]+new_move)
+    # v2 = np.array(verts[nbrs[start_node+1]]) - np.array(verts[src]+new_move)
+
+    #area = .5 * np.linalg.norm(np.cross(v1,v2))
+    #area = area * len(nbrs) #* (rcp_length_unit**2)
+    return area
+
+# returns neighbors of certain vertex
+def get_n(verts, faces):
+
+    nbrs = dict()
+    for i in range(len(verts)):
+        nbrs[i] = set()
+
+    for face in faces:
+        nbrs[face[0]].add(face[1])
+        nbrs[face[0]].add(face[2])
+        nbrs[face[1]].add(face[2])
+        nbrs[face[1]].add(face[0])
+        nbrs[face[2]].add(face[0])
+        nbrs[face[2]].add(face[1])
+
+    for i in range(len(verts)):
+        nbrs[i] = np.array(list(nbrs[i]))
+
+    return nbrs
+
+# this will return normalized vector that is
+# in the direction of the surface shape
+def get_surface_norm(model, sphere, src, nbrs):
+
+    sp = np.asarray(model.get_vertex(sphere, src))
+    vec = np.array([0.0,0.0,0.0])
+    for ver in nbrs:
+        p = np.asarray(model.get_vertex(sphere, ver))
+        vec += p-sp
+
+    for i in range(len(vec)):
+        vec[i] = vec[i]/len(nbrs)
+
+    my_norm = np.linalg.norm(vec)
+    for i in range(len(vec)):
+        vec[i] = vec[i]/my_norm
+
+    return vec
+
+def get_ens(ind, model, wall_list, sphere, cur_nbrs, init_area, init_vol):
+
+    rcp_length_unit = 0.01 # constant used internally in simulator
+
+    En = 0
+
+    #(src, nbrs, model, sphere1, new_move=m.Vec3(0,0,0))
+    area_c = get_area(ind, cur_nbrs, model, sphere)
+
+    if abs(area_c - init_area[j]) > 10:
+        n = rnd.uniform(-5,5)
+    else:
+        n = rnd.uniform(-1,1)
+
+    vert_surface_par = get_surface_norm(model, sphere, ind, cur_nbrs)
+    x_move = 2*n*vert_surface_par[0] # random move that will be checked
+    y_move = 2*n*vert_surface_par[1]
+    z_move = 2*n*vert_surface_par[2]
+    par_moves = np.asarray([x_move,y_move,z_move])
+
+    vert_un = model.get_vertex_unit_normal(sphere, ind)
+    x_move = 2*n*vert_un[0] # random move that will be checked
+    y_move = 2*n*vert_un[1]
+    z_move = 2*n*vert_un[2]
+    perp_moves = np.asarray([x_move,y_move,z_move])
+
+    moves = perp_moves+par_moves
+
+    area_n = get_area(ind, cur_nbrs, model, sphere, moves)
+
+    Ka = 10 # this is our area modulus
+
+    # print(sphere)
+    # print(sphere.vertex_list[ind])
+    # volc = VolumeOfMesh(model, sphere, wall_list)
+    # voln = VolumeOfMesh(model, sphere, wall_list)
+    # Ev = ((vol-init_vol)**2)/init_vol
+    En = (((1/2)*Ka*(area_n-init_area[ind])**2)/init_area[ind])
+    Ec = (((1/2)*Ka*(area_c-init_area[ind])**2)/init_area[ind])
+
+    return En, Ec, moves
+
+
+if i % 10 == 0:
+      for k in range(CELL_NUM_VERTICES):
+          En = 0
+          Ec = 0
+          En, Ec, moves = get_ens(k, model, instantiation.Organelle_1.wall_list, instantiation.Organelle_1, nbrs.get(k), init_area, init_vol)
+          Ev = ((vol-init_vol)**2)/init_vol
+          # En += Ev
+          # Ec += Ev
+          num = rnd.uniform(0,1) # used to get probabilty if new energy is
+          dif_const = .01
+          if En < Ec:
+              # if new en is lower than current always make move
+              displacement = moves
+              displacement += np.asarray([dif_const*Ev, dif_const*Ev, dif_const*Ev])
+              model.add_vertex_move(instantiation.Organelle_1, k, (displacement * np.asarray([0.01, 0.01, 0.01])))
+
+          elif num <= math.e**(-1*abs(En-Ec)):
+              # when higher then current energy only move with given probabilty
+              displacement = moves
+              displacement += np.asarray([dif_const*Ev, dif_const*Ev, dif_const*Ev])
+              model.add_vertex_move(instantiation.Organelle_1, k, (displacement * np.asarray([0.01, 0.01, 0.01])))
+
+          else:
+              displacement = np.asarray([dif_const*Ev, dif_const*Ev, dif_const*Ev])
+              model.add_vertex_move(instantiation.Organelle_1, k, (displacement * np.asarray([0.01, 0.01, 0.01])))
+
+      model.apply_vertex_moves(randomize_order=False)
