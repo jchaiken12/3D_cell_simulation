@@ -8,9 +8,11 @@ was version 3.11 as stated on the mcell website. Then the environment variable M
 
     export MCELL_PATH=<install_path>/Blender-2.93-CellBlender/2.93/scripts/addons/cellblender/extensions/mcell/
 
-The same should be done for a later version of Blender and the corresponding cellblender addon. Once the correct python 
-version is set to be run for the command line and the environment variable is set to the correct path
-one can run the main python script. The main python script to run each simulation is called model.py.
+The same should be done for a later version of Blender and the corresponding cellblender addon. The path and file structure 
+for the newest cellblender addon is different but what is needed is the reference to the same location of the mcell folder. 
+Once the correct python version is set to be run for the command line and the environment variable is set to the correct path
+one can run the main python script. The main python script to run each simulation is called model.py. Make sure all 
+model.py, parameters.py, subsystem.py, model.bngl, observables.py, geometry.py, etc are all in the same folder.
 On the command line we would write the following line with reference to the correct path:
 
     python model.py
@@ -22,5 +24,13 @@ viz_data folder until all iterations are finished. The number of iterations shou
 Again we need at least python 3.11 to run the code. Then the environment variable MCELL_PATH must be set through Microsofts
 environment variables window. To create a new variable: Click "New" under the desired section (User or System), enter the 
 "Variable name" of MCELL_PATH and "Variable value" as 
-<install_path>/Blender-2.93-CellBlender/2.93/scripts/addons/cellblender/extensions/mcell/
-and click "OK."
+
+    <install_path>/Blender-2.93-CellBlender/2.93/scripts/addons/cellblender/extensions/mcell/
+    
+and click "OK." <br/>
+Next open a command line and navigate to the location where all the python files are downloaded just as in the above Linux
+setup and run
+
+    python model.py
+
+The same output as above should be expected.
