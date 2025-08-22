@@ -19,7 +19,7 @@ was as follows:
 1. A cellular piston done in mcell3, lost somewhere in the computer at the lab, 
 2. Elasticity done in a developer version between mcell3 and mcell4, 
 3. Pressure done in mcell4
-4. Coverslip and car-t cell interaction with added polymerization and frictional forces
+4. Coverslip and car-t cell interaction with added polymerization, frictional forces, and existing elasticity
 
 Once one project was finished there was no maintaince work done to see how the piston simulation ran in 
 mcell4 for example.
