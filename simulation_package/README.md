@@ -19,6 +19,8 @@ was as follows:
 2. Elasticity done in a developer version between mcell3 and mcell4, 
 3. Pressure done in mcell4
 4. Coverslip and car-t cell interaction with added polymerization and frictional forces
+
+
 Python script would start approximately with the line
 
     import mcell as m
