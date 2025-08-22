@@ -19,8 +19,10 @@ physical simulation were encountered.
 ### For Future Development
 There exist around 100 examples of scripts utilizing the mcell library in python that can be found here <br/>
 https://github.com/mcellteam/mcell_tests/tree/master
+
 Also lots of good documentation references on the examples with a nice search engine and what functions they utilize can be found below <br/>
 https://mcell.org/mcell4_documentation/index.html
+
 If for example some documentation on an object is missing the pymcell.pyi contained inside the mcell engine 
 contains the rough outline of all the functions available to be used in python using the mcell library.
 Modifying the Cellblender addon is signifigantly easier than modifying the mcell4 engine given the complexity
