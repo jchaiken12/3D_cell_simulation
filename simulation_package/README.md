@@ -17,10 +17,10 @@ physical simulation were encountered.
 2. No k-d tree or octree was implemented within the mcell4 engine drastically slowing down our implementation of frictional forces.
 
 ### For Future Development
-There exist around 100 examples of scripts utilizing the mcell library in python that can be found here <br/>
+There exist around 100 examples of scripts utilizing the mcell library in python that can be found below: <br/>
 https://github.com/mcellteam/mcell_tests/tree/master
 
-Also lots of good documentation references on the examples with a nice search engine and what functions they utilize can be found below <br/>
+Also lots of good documentation references on the examples with a nice search engine and what functions they utilize can be found below: <br/>
 https://mcell.org/mcell4_documentation/index.html
 
 If for example some documentation on an object is missing the pymcell.pyi contained inside the mcell engine 
