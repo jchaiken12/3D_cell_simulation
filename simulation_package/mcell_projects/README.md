@@ -27,7 +27,7 @@ environment variables window. To create a new variable: Click "New" under the de
 
     <install_path>/Blender-2.93-CellBlender/2.93/scripts/addons/cellblender/extensions/mcell/
     
-and click "OK." If a different blender exists with the addon then 2.93 must become **X** in the file path<br/>
+and click "OK." If a different blender exists with the addon then 2.93 must become **X** in the file path. <br/>
 Next open a command line and navigate to the location where all the python files are downloaded just as in the above Linux
 setup and run
 
