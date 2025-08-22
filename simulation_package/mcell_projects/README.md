@@ -40,4 +40,4 @@ The command on the command prompt, "Terminal" for linux users or "Command Prompt
     
     <install_path>/Blender-2.93-CellBlender/my_blender -P <install_path>/Blender-2.93-CellBlender/2.93/scripts/addons/cellblender/developer_utilities/mol_viz_scripts/viz_mcell_run.py -- viz_data/seed_00001/
 
-A later version of blender would require changing Blender-2.93-CellBlender to Blender-X-CellBlender for whichever version of blender was installed with the critical cellblender addon.
+A later version of blender would require changing Blender-2.93-CellBlender to Blender-**X**-CellBlender for whichever version of blender was installed with the critical cellblender addon.
