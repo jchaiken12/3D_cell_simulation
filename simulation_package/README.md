@@ -15,10 +15,10 @@ in this folder allowing use of the code in other python scripts.
 This folder is where all individual simulation projects were constucted and run using the command prompt.
 Probably around 30 were created and then work began on the next project. The general project progression
 was as follows:
-    1. 1st a cellular piston done in mcell3, lost somewhere computer in the lab, 
-    2. 2nd elasticity done in a developer version between mcell3 and mcell4, 
-    3. 3rd was pressure done in mcell4
-    4. 4th coverslip and car-t cell interaction with added polymerization and frictional forces
+1. 1st a cellular piston done in mcell3, lost somewhere computer in the lab, 
+2. 2nd elasticity done in a developer version between mcell3 and mcell4, 
+3. 3rd was pressure done in mcell4
+4. 4th coverslip and car-t cell interaction with added polymerization and frictional forces
 Python script would start approximately with the line
 
     import mcell as m
