@@ -23,7 +23,9 @@ was as follows:
 
 Python script would start approximately with the line
 
+    #!/usr/bin/env python3
     import mcell as m
     
 to execute the necessary functions, parameters, etc. to run the physics based simulation. 
+Also this guarantees the correct version of python is run for the scripts.
 
