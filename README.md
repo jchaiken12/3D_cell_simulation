@@ -4,4 +4,4 @@ Github repository for research paper *Towards large scale 3D modelling and simul
 For more installation instructions please refer to the simulation package folder README.
 
 There is a README in the package_simulation/mcell_projects/cellblender_addon for adding a nice addon to export geometry files from blender
-to python. Highly recommended for generating meshes for simulations.
+to a readable python file for the Mcell3/4 engine. Highly recommended for generating meshes for simulations.
