@@ -10,6 +10,22 @@ https://mcell.org/download_previous_versions.html <br/>
 ## Mcell
 This folder contains the required code to run the cellular simulation. The build files are included
 in this folder allowing use of the code in other python scripts.
+### Limitations
+Over the course of the time doing projects limitations on what the engine could do for our desired 
+physical simulation were encountered. 
+1. We could not implement bulky molecules with just mcell4
+2. No k-d tree or octree was implemented within the mcell4 engine drastically slowing down our implementation of frictional forces.
+
+### For Future Development
+There exist around 100 examples of scripts utilizing the mcell library in python that can be found here <br/>
+https://github.com/mcellteam/mcell_tests/tree/master
+Also lots of good documentation references on the examples with a nice search engine and what functions they utilize can be found below <br/>
+https://mcell.org/mcell4_documentation/index.html
+If for example some documentation on an object is missing the pymcell.pyi contained inside the mcell engine 
+contains the rough outline of all the functions available to be used in python using the mcell library.
+Modifying the Cellblender addon is signifigantly easier than modifying the mcell4 engine given the complexity
+contained with the mcell4 engine. Both are doable but knowledge in topics of computer architecture, parallelization,
+etc. are required to understand the mcell4 engine in its totality.
 
 ## Mcell Projects
 This folder is where all individual simulation projects were constucted and run using the command prompt.
