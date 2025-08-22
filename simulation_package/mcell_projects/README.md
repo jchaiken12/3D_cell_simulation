@@ -36,6 +36,6 @@ setup and run
 The same output as above should be expected.
 
 ## Visualization with Blender using Cellblender
-The command on the command prompt, "Terminal" for linux users or "Command Prompt" on Windows distributions that starts Blender with the cellblender addon and allows a simulation run to be visualized on both micrsoft systems and linux distributions is as follows:
+The command on the command prompt, "Terminal" for linux users or "Command Prompt" on Windows distributions, that starts Blender with the cellblender addon and allows a simulation run to be visualized on both micrsoft systems and linux distributions is as follows:
     
     <install_path>/Blender-2.93-CellBlender/my_blender -P <install_path>/Blender-2.93-CellBlender/2.93/scripts/addons/cellblender/developer_utilities/mol_viz_scripts/viz_mcell_run.py -- viz_data/seed_00001/
