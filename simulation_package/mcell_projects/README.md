@@ -8,10 +8,12 @@ was version 3.11 as stated on the mcell website. Then the environment variable M
 
     export MCELL_PATH=<install_path>/Blender-2.93-CellBlender/2.93/scripts/addons/cellblender/extensions/mcell/
 
-The same should be done for a later version of Blender and the corresponding cellblender addon. The path and file structure 
-for the newest cellblender addon is different but what is needed is the reference to the same location of the mcell folder. 
-Once the correct python version is set to be run for the command line and the environment variable is set to the correct path
-one can run the main python script. The main python script to run each simulation is called model.py. Make sure all 
+The same should be done for a later version of Blender and the corresponding cellblender addon. 
+If a different blender exists with the addon then 2.93 must become **X** in the file path.
+The path and file structure for the newest cellblender addon is different but what is needed is 
+the reference to the same location of the mcell folder. Once the correct python version is set 
+to be run for the command line and the environment variable is set to the correct pathone can run the
+main python script. The main python script to run each simulation is called model.py. Make sure all 
 model.py, parameters.py, subsystem.py, model.bngl, observables.py, geometry.py, etc are all in the same folder.
 On the command line we would write the following line with reference to the correct path:
 
