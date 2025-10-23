@@ -7,8 +7,8 @@ from geometry import *
 # load parameters from BNGL
 bngl_params = m.bngl_utils.load_bngl_parameters('model.bngl')
 
-k_on = bngl_params['k_on']
-k_off = bngl_params['k_off']
+k_bind = bngl_params['k_bind']
+k_unbind = bngl_params['k_unbind']
 
 # ---- simulation setup ----
 
@@ -20,6 +20,7 @@ EXPORT_DATA_MODEL = True
 # basic geometry parameters for our given simulation
 CELL_NUM_VERTICES = len(Cell_vertex_list)
 COVER_SLIP_NUM_VERTICES = len(Cover_slip_vertex_list)
+PAIRING_DISTANCE = 0.05 # probably desirable radius 0.005
 
 # do not use the variable module_seed_value directly,
 # Python on import creates copies that do not reflect the current value

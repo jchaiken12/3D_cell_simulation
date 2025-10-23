@@ -9,14 +9,10 @@ def set_bngl_molecule_types_info(subsystem):
     # assert a, "Elementary molecule type 'a' was not found"
     # a.diffusion_constant_3d = 1e-6
 
-    complex = subsystem.find_elementary_molecule_type('complex')
-    assert complex, "Elementary molecule type 'complex' was not found"
-    complex.diffusion_constant_2d = 1e-6
-
     t1 = subsystem.find_elementary_molecule_type('t1')
     assert t1, "Elementary molecule type 't1' was not found"
-    t1.diffusion_constant_2d = 1e-7
+    t1.diffusion_constant_2d = 1e-5
 
     t2 = subsystem.find_elementary_molecule_type('t2')
     assert t2, "Elementary molecule type 't2' was not found"
-    t2.diffusion_constant_2d = 1e-8
+    t2.diffusion_constant_2d = 0

@@ -1,8 +1,5 @@
-import mcell as m
-
 import numpy as np
 import random as rnd
-import math
 
 # here we will define the movements of the membrane based on the energies and forces at play
 # that act on the cell
@@ -16,12 +13,12 @@ import math
 
 stereometry_singelton = None
 
-def get_ens(vert_ind, cur_nbrs, init_vol):
-
-    rcp_length_unit = 0.01 # constant used internally in simulator
+def get_ens(vert_ind, cur_nbrs):
 
     En = 0
     sphere = stereometry_singelton.geometry_obj
+
+    tensile_const = 5 # was 2
 
     #(src, nbrs, model, sphere1, new_move=m.Vec3(0,0,0))
     area_c = stereometry_singelton.get_area(vert_ind, cur_nbrs)
@@ -32,15 +29,15 @@ def get_ens(vert_ind, cur_nbrs, init_vol):
         n = rnd.uniform(-1,1)
 
     vert_surface_par = stereometry_singelton.get_surface_norm(vert_ind, cur_nbrs)
-    x_move = 2*n*vert_surface_par[0] # random move that will be checked
-    y_move = 2*n*vert_surface_par[1]
-    z_move = 2*n*vert_surface_par[2]
+    x_move = tensile_const*n*vert_surface_par[0] # random move that will be checked
+    y_move = tensile_const*n*vert_surface_par[1]
+    z_move = tensile_const*n*vert_surface_par[2]
     par_moves = np.asarray([x_move,y_move,z_move])
 
     vert_un = stereometry_singelton.main_model.get_vertex_unit_normal(sphere, vert_ind)
-    x_move = 2*n*vert_un[0] # random move that will be checked
-    y_move = 2*n*vert_un[1]
-    z_move = 2*n*vert_un[2]
+    x_move = tensile_const*n*vert_un[0] # random move that will be checked
+    y_move = tensile_const*n*vert_un[1]
+    z_move = tensile_const*n*vert_un[2]
     perp_moves = np.asarray([x_move,y_move,z_move])
 
     moves = perp_moves+par_moves

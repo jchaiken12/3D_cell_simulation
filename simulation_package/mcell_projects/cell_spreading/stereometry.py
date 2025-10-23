@@ -3,12 +3,8 @@
 # for things like volume, area, and so on.
 # Geometry is done on shapes made of triangles to create a mesh.
 
-import mcell as m
-
 from parameters import *
-
 import numpy as np
-import math
 
 class stereometry_tools:
 
@@ -105,8 +101,9 @@ class stereometry_tools:
             vec[i] = vec[i]/len(nbrs)
 
         my_norm = np.linalg.norm(vec)
-        for i in range(len(vec)):
-            vec[i] = vec[i]/my_norm
+        if my_norm >= 10**(-6):
+            for i in range(len(vec)):
+                vec[i] = vec[i]/my_norm
 
         return vec
 

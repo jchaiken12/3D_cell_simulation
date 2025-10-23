@@ -11,16 +11,16 @@ from geometry import *
 
 rel_t1 = m.ReleaseSite(
     name = 'rel_t1',
-    complex = m.Complex('t1', orientation = m.Orientation.UP),
+    complex = m.Complex('t1(r)', orientation = m.Orientation.UP),
     region = Cell,
-    number_to_release = 700
+    number_to_release = 250000
 )
 
 rel_t2 = m.ReleaseSite(
     name = 'rel_t2',
-    complex = m.Complex('t2', orientation = m.Orientation.UP),
+    complex = m.Complex('t2(l)', orientation = m.Orientation.UP),
     region = Cover_slip,
-    number_to_release = 700
+    number_to_release = 250000
 )
 
 # ---- surface classes assignment ----
