@@ -1,0 +1,12 @@
+begin parameters
+    k_ab 1e9
+
+end parameters
+
+begin molecule types
+    b
+end molecule types
+
+begin observables
+    Species b_World b
+end observables
